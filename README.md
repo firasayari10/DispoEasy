@@ -10,6 +10,11 @@ WasteAI Assistant is an intelligent waste management solution developed as part 
 - **AI-Powered Chatbot**: RAG-based assistant that answers questions about waste management and recycling
 - **Sustainable Recycling Steps**: Creates  representations of recycled materials using stable diffusion .
 
+## Project Documentation
+- [Full Project Report](./report.pdf) - Comprehensive project documentation and analysis
+- [Research Paper](./research_paper.pdf) - Academic paper detailing the AI approaches used
+- [Project Blog](https://679fcb9642158.site123.me) - Follow our journey and updates on the Aspire platform
+
 ## Tech Stack
 
 ### Frontend
@@ -121,4 +126,4 @@ The project requires several API keys for external services. Before running the 
    Open your browser and navigate to `http://localhost:4200`
 
 ## Acknowledgment
-This project was developed as part of the Advanced AI Applications module at ESPRIT Graduate School of Engineering in collaboration with Second life (https://www.secondlife.ngo). We would like to thank our instructors for their guidance and support throughout the development process. 
+This project was developed as part of the Advanced AI Applications module at ESPRIT Graduate School of Engineering in collaboration with Second life (https://www.secondlife.ngo). We would like to thank our instructors for their guidance and support throughout the development process.
