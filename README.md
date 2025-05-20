@@ -1,7 +1,9 @@
 # DispoEasy
 
 ## Overview
-WasteAI Assistant is an intelligent waste management solution developed as part of the coursework for the Advanced AI Applications module at ESPRIT Graduate School of Engineering. The project combines multiple AI technologies to help users identify, classify, and properly dispose of various waste materials.
+WasteAI Assistant is an intelligent waste management solution developed as part of the coursework for the Advanced AI Applications module at ESPRIT Graduate School of Engineering in collaboration with Second Life. The project combines multiple AI technologies to help users identify, classify, and properly dispose of various waste materials.
+
+![Second Life Logo](./Logo%20Second%20Life%20final%20(1).png)
 
 ## Features
 - **Waste Classification**: Automatically identifies waste materials from uploaded images
@@ -53,11 +55,26 @@ waste_assistantfront/
 - Python 3.8+
 - CUDA-compatible GPU (recommended for detection and image generation)
 
+### API Keys Setup
+The project requires several API keys for external services. Before running the application, you need to create `.env` files in the following locations:
+
+1. **Stable Diffusion Service**
+   ```bash
+   # In WasteAiSystem/stablediffusion/.env
+   OPENAI_API_KEY=your_mistral_api_key_here
+   ```
+
+2. **RAG Waste Service**
+   ```bash
+   # In WasteAiSystem/RAGWaste/.env
+   GOOGLE_BOOKS_API_KEY=your_google_books_api_key_here
+   ```
+
 ### Installation
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/yourusername/waste-ai-assistant.git
+   git clone https://github.com/firasayari10/waste-ai-assistant.git
    cd waste-ai-assistant
    ```
 

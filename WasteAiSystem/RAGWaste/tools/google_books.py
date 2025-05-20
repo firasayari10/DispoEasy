@@ -6,6 +6,11 @@ from pydantic import BaseModel, Field
 from tenacity import retry, stop_after_attempt, wait_exponential
 from functools import lru_cache
 import time
+import os
+from dotenv import load_dotenv
+
+# Load environment variables
+load_dotenv()
 
 class GoogleBooksSchema(BaseModel):
     query: str = Field(..., description="The search query for books about waste management")
@@ -24,8 +29,16 @@ class GoogleBooksTool(BaseTool):
     def _run(self, query: str, **kwargs) -> str:
         """Search Google Books API with caching and rate limiting"""
         try:
+            # Get API key from environment or streamlit secrets
+            api_key = os.getenv("GOOGLE_BOOKS_API_KEY")
+            if not api_key:
+                try:
+                    api_key = st.secrets["GOOGLE_BOOKS_API_KEY"]
+                except:
+                    return "API key not found. Please set the GOOGLE_BOOKS_API_KEY environment variable."
+            
             # API call
-            service = build("books", "v1", developerKey=st.secrets["GOOGLE_BOOKS_API_KEY"])
+            service = build("books", "v1", developerKey=api_key)
             results = service.volumes().list(
                 q=f"{query} waste management",
                 maxResults=3,

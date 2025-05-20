@@ -1,13 +1,22 @@
 import openai
 from diffusers import StableDiffusionXLPipeline
 import torch
+import os
+from dotenv import load_dotenv
 
-# Configuration API Mistral (clé à sécuriser)
-openai.api_key = "1QUMWhu2cSOcEupqAvsyuU0j37aCnOqb"
+# Load environment variables
+load_dotenv()
+
+# Configuration API Mistral (using environment variables)
+openai.api_key = os.getenv("OPENAI_API_KEY")
 openai.api_base = "https://api.mistral.ai/v1"
 
 # Génération de description
 def generate_description_with_mistral(pred_class: str) -> str:
+    # Check if API key is available
+    if not openai.api_key:
+        return f"A sustainable product made from recycled {pred_class}, with eco-friendly design elements, shown on a clean white studio background."
+    
     prompt = (
         f"You are a sustainable product designer. Propose one specific, useful and realistic object made only from recycled '{pred_class}'. "
         "Keep the description short and precise, suitable for image generation. The object must be 100% made from that material and usable in daily life. "
@@ -16,14 +25,17 @@ def generate_description_with_mistral(pred_class: str) -> str:
         "\"a [object] made from recycled [material], [key visual details], shown on a clean white studio background\"."
     )
 
-    response = openai.ChatCompletion.create(
-        model="mistral-medium",
-        messages=[{"role": "user", "content": prompt}],
-        temperature=0.7,
-        max_tokens=200
-    )
-
-    return response["choices"][0]["message"]["content"].strip()
+    try:
+        response = openai.ChatCompletion.create(
+            model="mistral-medium",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.7,
+            max_tokens=200
+        )
+        return response["choices"][0]["message"]["content"].strip()
+    except Exception as e:
+        print(f"Error generating description: {e}")
+        return f"A sustainable product made from recycled {pred_class}, with eco-friendly design elements, shown on a clean white studio background."
 
 # Chargement du pipeline une seule fois
 pipe = StableDiffusionXLPipeline.from_pretrained(
