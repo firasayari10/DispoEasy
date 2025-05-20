@@ -3,8 +3,6 @@
 ## Overview
 WasteAI Assistant is an intelligent waste management solution developed as part of the coursework for the Advanced AI Applications module at ESPRIT Graduate School of Engineering in collaboration with Second Life. The project combines multiple AI technologies to help users identify, classify, and properly dispose of various waste materials.
 
-![Second Life Logo](./Logo%20Second%20Life%20final%20(1).png)
-
 ## Features
 - **Waste Classification**: Automatically identifies waste materials from uploaded images
 - **Recycling Guidance**: Provides detailed information on how to properly recycle or dispose of identified waste
