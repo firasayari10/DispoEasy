@@ -3,22 +3,6 @@
 ## Overview
 WasteAI Assistant is an intelligent waste management solution developed as part of the coursework for the Advanced AI Applications module at ESPRIT Graduate School of Engineering. The project combines multiple AI technologies to help users identify, classify, and properly dispose of various waste materials.
 
-## Topics
-- python
-- machine-learning
-- data-analysis
-- web-development
-- deep-learning
-- artificial-intelligence
-- data-visualization
-- waste-management
-- image-classification
-- object-detection
-- angular
-- fastapi
-- rag
-- stable-diffusion
-
 ## Features
 - **Waste Classification**: Automatically identifies waste materials from uploaded images
 - **Recycling Guidance**: Provides detailed information on how to properly recycle or dispose of identified waste
