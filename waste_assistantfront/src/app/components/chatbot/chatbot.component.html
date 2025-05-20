@@ -1,0 +1,33 @@
+<div class="chat-container">
+  <div class="messages-container">
+    <div *ngFor="let message of messages" class="message" [ngClass]="{'user': message.isUser, 'bot': !message.isUser}">
+      <div class="message-content" [innerHTML]="message.text"></div>
+      <div class="message-timestamp">{{message.timestamp | date:'shortTime'}}</div>
+    </div>
+    <div *ngIf="isLoading" class="message bot">
+      <div class="typing-indicator">
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+        <div class="typing-dot"></div>
+      </div>
+    </div>
+  </div>
+  <div class="input-container">
+    <input 
+      type="text" 
+      class="message-input" 
+      [(ngModel)]="userInput" 
+      (keyup.enter)="sendMessage()"
+      placeholder="Type your message here..."
+      [disabled]="isLoading">
+    <button 
+      class="send-button" 
+      (click)="sendMessage()" 
+      [disabled]="isLoading || !userInput.trim()">
+      Send
+    </button>
+    <br>
+    <br>
+  </div>
+  <br>
+</div>

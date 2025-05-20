@@ -1,0 +1,59 @@
+<div class="drone-footage-container">
+  <div class="upload-section">
+    <h2>Drone Footage Analysis</h2>
+    <p>Upload drone footage to analyze waste detection and classification</p>
+
+    <div class="upload-area" (click)="fileInput.click()" [class.dragover]="isDragover" (dragover)="onDragOver($event)"
+      (dragleave)="onDragLeave($event)" (drop)="onDrop($event)">
+      <input #fileInput type="file" accept="image/*" (change)="onFileSelected($event)" style="display: none">
+
+      <div class="upload-content" *ngIf="!selectedImage">
+        <i class="fas fa-cloud-upload-alt"></i>
+        <p>Click or drag and drop drone footage here</p>
+        <span class="file-types">Supported formats: JPG, PNG, JPEG</span>
+      </div>
+
+      <div class="preview-content" *ngIf="selectedImage">
+        <div class="canvas-container">
+          <canvas id="detectionCanvas" class="preview-canvas"></canvas>
+        </div>
+        <button class="change-image" (click)="fileInput.click()">
+          <i class="fas fa-sync-alt"></i> Change Image
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="analysis-section" *ngIf="isAnalyzing">
+    <h3>Analyzing Image...</h3>
+    <div class="progress-bar">
+      <div class="progress" [style.width.%]="analysisProgress"></div>
+    </div>
+    <p class="progress-text">{{analysisProgress}}% Complete</p>
+  </div>
+
+  <div class="results-section" *ngIf="detectionResults.length > 0">
+    <h3>Detection Results</h3>
+    <div class="results-grid">
+      <div class="result-card" *ngFor="let result of detectionResults">
+        <div class="result-header">
+          <h4>{{result.wasteType}}</h4>
+          <span class="confidence" [style.background-color]="getConfidenceColor(result.confidence)">
+            {{formatConfidence(result.confidence)}}
+          </span>
+        </div>
+        <div class="result-details">
+          <p>Location: ({{result.bbox[0] | number:'1.0-0'}}, {{result.bbox[1] | number:'1.0-0'}})</p>
+          <div class="detection-preview-container">
+            <img [src]="result.croppedImage" class="detection-image" [style.max-width.px]="150"
+              [style.max-height.px]="150" [style.object-fit]="'contain'">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="no-results" *ngIf="!isAnalyzing && !detectionResults.length && selectedImage">
+    <p>No waste detected in the image. Try uploading a different image.</p>
+  </div>
+</div>
